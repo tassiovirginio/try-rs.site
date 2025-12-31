@@ -1,313 +1,272 @@
-import React, { useState, useEffect } from 'react';
-import { 
-  Github, 
-  Terminal, 
-  Zap, 
-  Search, 
-  Trash2, 
-  GitBranch, 
-  ChevronRight, 
-  Copy, 
-  Check, 
-  Download,
-  Command,
-  Monitor,
-  ExternalLink,
-  Cpu
-} from 'lucide-react';
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>try-rs — Your experiments deserve a place</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        .bg-grid {
+            background-image: radial-gradient(circle at center, rgba(234, 88, 12, 0.15), transparent 70%);
+        }
+        .tab-active {
+            background-color: #ea580c;
+            color: white;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-[#0d1117] text-gray-300 selection:bg-orange-500/30">
 
-const App = () => {
-  const [copied, setCopied] = useState(false);
-  const [activeTab, setActiveTab] = useState('cargo');
-  const [gifError, setGifError] = useState(false);
-
-  const copyToClipboard = (text) => {
-    navigator.clipboard.writeText(text);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-
-  const installCommands = {
-    cargo: "cargo install try-rs",
-    aur: "yay -S try-rs-bin",
-    binary: "gh release download -R tassiovirginio/try-rs"
-  };
-
-  const demoGifUrl = "https://raw.githubusercontent.com/tassiovirginio/try-rs/refs/heads/main/try-rs.gif";
-
-  return (
-    <div className="min-h-screen bg-[#0d1117] text-gray-300 font-sans selection:bg-orange-500/30">
-      {/* Navigation */}
-      <nav className="border-b border-gray-800 bg-[#0d1117]/80 backdrop-blur-md sticky top-0 z-50">
-        <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-orange-600 rounded flex items-center justify-center text-white font-bold">🦀</div>
-            <span className="text-xl font-bold text-white tracking-tight italic">try-rs</span>
-          </div>
-          <div className="flex items-center gap-6">
-            <a href="#features" className="hover:text-orange-500 transition-colors hidden md:block">Features</a>
-            <a href="#install" className="hover:text-orange-500 transition-colors hidden md:block">Installation</a>
-            <a 
-              href="https://github.com/tassiovirginio/try-rs" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 bg-gray-800 hover:bg-gray-700 text-white px-4 py-2 rounded-lg transition-all"
-            >
-              <Github size={18} />
-              <span className="hidden sm:inline">GitHub</span>
-            </a>
-          </div>
-        </div>
-      </nav>
-
-      {/* Hero Section */}
-      <header className="pt-20 pb-32 px-6 relative overflow-hidden">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,rgba(234,88,12,0.1),transparent_70%)] pointer-events-none" />
-        
-        <div className="max-w-4xl mx-auto text-center relative z-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-500 text-sm font-medium mb-6">
-            <Cpu size={14} />
-            <span>Built with Rust for maximum performance</span>
-          </div>
-          <h1 className="text-5xl md:text-7xl font-extrabold text-white mb-6 tracking-tight">
-            Your experiments <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-600">
-              deserve a place.
-            </span>
-          </h1>
-          <p className="text-xl text-gray-400 mb-10 max-w-2xl mx-auto leading-relaxed">
-            A lightning-fast workspace manager (TUI) for your temporary tests. Clone, create, and explore without cluttering your main directory.
-          </p>
-
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
-            <div className="w-full sm:w-auto flex items-center bg-[#161b22] border border-gray-700 rounded-xl p-1 pl-4">
-              <Terminal size={18} className="text-orange-500 mr-3" />
-              <code className="flex-1 text-left text-orange-100 font-mono text-sm mr-4">cargo install try-rs</code>
-              <button 
-                onClick={() => copyToClipboard("cargo install try-rs")}
-                className="p-3 hover:bg-gray-700 rounded-lg transition-colors text-gray-400 hover:text-white"
-              >
-                {copied ? <Check size={18} className="text-green-500" /> : <Copy size={18} />}
-              </button>
+    <!-- Navigation -->
+    <nav class="border-b border-gray-800 bg-[#0d1117]/80 backdrop-blur-md sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 bg-orange-600 rounded flex items-center justify-center text-white font-bold">🦀</div>
+                <span class="text-xl font-bold text-white tracking-tight italic">try-rs</span>
             </div>
-            <a 
-              href="#install" 
-              className="w-full sm:w-auto px-8 py-3.5 bg-white text-black font-bold rounded-xl hover:bg-gray-200 transition-colors flex items-center justify-center gap-2"
-            >
-              Get Started
-              <ChevronRight size={18} />
-            </a>
-          </div>
+            <div class="flex items-center gap-6">
+                <a href="#features" class="hover:text-orange-500 transition-colors hidden md:block">Features</a>
+                <a href="#install" class="hover:text-orange-500 transition-colors hidden md:block">Installation</a>
+                <a href="https://github.com/tassiovirginio/try-rs" target="_blank" class="flex items-center gap-2 bg-gray-800 hover:bg-gray-700 text-white px-4 py-2 rounded-lg transition-all">
+                    <i data-lucide="github" class="w-4 h-4"></i>
+                    <span class="hidden sm:inline">GitHub</span>
+                </a>
+            </div>
         </div>
-      </header>
+    </nav>
 
-      {/* Real Demo (GIF) */}
-      <section className="px-6 -mt-16 relative z-20">
-        <div className="max-w-5xl mx-auto">
-          <div className="bg-[#010409] border border-gray-700 rounded-xl shadow-2xl overflow-hidden shadow-orange-500/10">
-            {/* Terminal Window Header */}
-            <div className="bg-gray-800/50 px-4 py-3 flex items-center justify-between border-b border-gray-700">
-              <div className="flex gap-1.5">
-                <div className="w-3 h-3 rounded-full bg-red-500/40" />
-                <div className="w-3 h-3 rounded-full bg-yellow-500/40" />
-                <div className="w-3 h-3 rounded-full bg-green-500/40" />
-              </div>
-              <div className="text-xs font-mono text-gray-500 flex items-center gap-2">
-                <Terminal size={12} />
-                tassiovirginio@rust-box: ~/projects/try-rs
-              </div>
-              <div className="w-12" />
+    <!-- Hero Section -->
+    <header class="pt-20 pb-32 px-6 relative overflow-hidden bg-grid">
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-500 text-sm font-medium mb-6">
+                <i data-lucide="cpu" class="w-3.5 h-3.5"></i>
+                <span>Built with Rust for maximum performance</span>
+            </div>
+            <h1 class="text-5xl md:text-7xl font-extrabold text-white mb-6 tracking-tight">
+                Your experiments <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-600">
+                    deserve a place.
+                </span>
+            </h1>
+            <p class="text-xl text-gray-400 mb-10 max-w-2xl mx-auto leading-relaxed">
+                A lightning-fast workspace manager (TUI) for your temporary tests. Clone, create, and explore without cluttering your main directory.
+            </p>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
+                <div class="w-full sm:w-auto flex items-center bg-[#161b22] border border-gray-700 rounded-xl p-1 pl-4">
+                    <i data-lucide="terminal" class="w-4 h-4 text-orange-500 mr-3"></i>
+                    <code class="flex-1 text-left text-orange-100 mono text-sm mr-4" id="hero-cmd">cargo install try-rs</code>
+                    <button onclick="copyCmd('cargo install try-rs', this)" class="p-3 hover:bg-gray-700 rounded-lg transition-colors text-gray-400 hover:text-white">
+                        <i data-lucide="copy" class="w-4 h-4"></i>
+                    </button>
+                </div>
+                <a href="#install" class="w-full sm:w-auto px-8 py-3.5 bg-white text-black font-bold rounded-xl hover:bg-gray-200 transition-colors flex items-center justify-center gap-2">
+                    Get Started
+                    <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Demo Section -->
+    <section class="px-6 -mt-16 relative z-20">
+        <div class="max-w-5xl mx-auto">
+            <div class="bg-[#010409] border border-gray-700 rounded-xl shadow-2xl overflow-hidden shadow-orange-500/10">
+                <div class="bg-gray-800/50 px-4 py-3 flex items-center justify-between border-b border-gray-700">
+                    <div class="flex gap-1.5">
+                        <div class="w-3 h-3 rounded-full bg-red-500/40"></div>
+                        <div class="w-3 h-3 rounded-full bg-yellow-500/40"></div>
+                        <div class="w-3 h-3 rounded-full bg-green-500/40"></div>
+                    </div>
+                    <div class="text-xs mono text-gray-500 flex items-center gap-2">
+                        <i data-lucide="terminal" class="w-3 h-3"></i>
+                        tassiovirginio@rust-box: ~/projects/try-rs
+                    </div>
+                    <div class="w-12"></div>
+                </div>
+                
+                <div class="relative aspect-video bg-black flex items-center justify-center group">
+                    <img src="https://raw.githubusercontent.com/tassiovirginio/try-rs/refs/heads/main/try-rs.gif" 
+                         alt="try-rs TUI Demo" 
+                         class="w-full h-full object-contain">
+                    <div class="absolute bottom-4 right-4 bg-black/60 backdrop-blur-md border border-gray-700 px-3 py-1.5 rounded-lg text-xs mono text-gray-300 opacity-0 group-hover:opacity-100 transition-opacity">
+                        Real TUI Demo
+                    </div>
+                </div>
+            </div>
+            <p class="mt-8 text-center text-sm text-gray-500 italic">
+                Interface built with <strong>Ratatui</strong> for a rich terminal experience.
+            </p>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section id="features" class="py-32 px-6">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-white mb-4">Why use try-rs?</h2>
+                <p class="text-gray-400">Manage your temporary directories without losing focus.</p>
             </div>
             
-            {/* Real GIF with React Error Handling */}
-            <div className="relative aspect-video bg-black flex items-center justify-center group">
-              {!gifError ? (
-                <img 
-                  src={demoGifUrl} 
-                  alt="try-rs TUI Demo" 
-                  className="w-full h-full object-contain"
-                  onError={() => setGifError(true)}
-                />
-              ) : (
-                /* Fallback if GIF fails */
-                <div className="absolute inset-0 flex flex-col items-center justify-center text-gray-500 bg-gray-900 font-mono p-10 text-center">
-                  <Monitor size={48} className="mb-4 opacity-20" />
-                  <p>Failed to load the demo GIF.</p>
-                  <a href={demoGifUrl} target="_blank" rel="noopener noreferrer" className="text-orange-500 underline mt-2 text-sm">View directly on GitHub</a>
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Feature Cards -->
+                <div class="p-8 bg-gray-800/20 border border-gray-800 rounded-2xl hover:border-orange-500/30 hover:bg-gray-800/30 transition-all group">
+                    <div class="w-12 h-12 bg-gray-800 rounded-xl flex items-center justify-center mb-6 border border-gray-700"><i data-lucide="zap" class="text-yellow-500"></i></div>
+                    <h3 class="text-xl font-bold text-white mb-3">Native Speed</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Rust ensures try-rs is lightweight and responds instantly to every keystroke.</p>
                 </div>
-              )}
-              
-              {/* Optional Overlay */}
-              {!gifError && (
-                <div className="absolute bottom-4 right-4 bg-black/60 backdrop-blur-md border border-gray-700 px-3 py-1.5 rounded-lg text-xs font-mono text-gray-300 opacity-0 group-hover:opacity-100 transition-opacity">
-                  Real TUI Demo
+                <div class="p-8 bg-gray-800/20 border border-gray-800 rounded-2xl hover:border-orange-500/30 hover:bg-gray-800/30 transition-all group">
+                    <div class="w-12 h-12 bg-gray-800 rounded-xl flex items-center justify-center mb-6 border border-gray-700"><i data-lucide="search" class="text-blue-500"></i></div>
+                    <h3 class="text-xl font-bold text-white mb-3">Fuzzy Finding</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Locate your past experiments by typing just parts of the name. Fast and intuitive.</p>
                 </div>
-              )}
+                <div class="p-8 bg-gray-800/20 border border-gray-800 rounded-2xl hover:border-orange-500/30 hover:bg-gray-800/30 transition-all group">
+                    <div class="w-12 h-12 bg-gray-800 rounded-xl flex items-center justify-center mb-6 border border-gray-700"><i data-lucide="git-branch" class="text-purple-500"></i></div>
+                    <h3 class="text-xl font-bold text-white mb-3">Clone & Try</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Pass a Git URL and try-rs takes care of the cloning and organization for you.</p>
+                </div>
+                <div class="p-8 bg-gray-800/20 border border-gray-800 rounded-2xl hover:border-orange-500/30 hover:bg-gray-800/30 transition-all group">
+                    <div class="w-12 h-12 bg-gray-800 rounded-xl flex items-center justify-center mb-6 border border-gray-700"><i data-lucide="command" class="text-orange-500"></i></div>
+                    <h3 class="text-xl font-bold text-white mb-3">Ratatui Interface</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">A complete TUI with windows, confirmation popups, and configurable colors.</p>
+                </div>
+                <div class="p-8 bg-gray-800/20 border border-gray-800 rounded-2xl hover:border-orange-500/30 hover:bg-gray-800/30 transition-all group">
+                    <div class="w-12 h-12 bg-gray-800 rounded-xl flex items-center justify-center mb-6 border border-gray-700"><i data-lucide="trash-2" class="text-red-500"></i></div>
+                    <h3 class="text-xl font-bold text-white mb-3">Safe Cleanup</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Remove what you no longer need with a shortcut, without risking important data.</p>
+                </div>
+                <div class="p-8 bg-gray-800/20 border border-gray-800 rounded-2xl hover:border-orange-500/30 hover:bg-gray-800/30 transition-all group">
+                    <div class="w-12 h-12 bg-gray-800 rounded-xl flex items-center justify-center mb-6 border border-gray-700"><i data-lucide="check" class="text-green-500"></i></div>
+                    <h3 class="text-xl font-bold text-white mb-3">Cross-platform</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">First-class support for Linux, macOS, and Windows. Consistent on any OS.</p>
+                </div>
             </div>
-          </div>
-          
-          <div className="mt-8 text-center">
-            <p className="text-sm text-gray-500 italic">
-              Interface built with <strong>Ratatui</strong> for a rich terminal experience.
-            </p>
-          </div>
         </div>
-      </section>
+    </section>
 
-      {/* Features */}
-      <section id="features" className="py-32 px-6">
-        <div className="max-w-6xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-white mb-4">Why use try-rs?</h2>
-            <p className="text-gray-400">Manage your temporary directories without losing focus.</p>
-          </div>
-          
-          <div className="grid md:grid-cols-3 gap-8">
-            <FeatureCard 
-              icon={<Zap className="text-yellow-500" />}
-              title="Native Speed"
-              description="Compile and run. Rust ensures try-rs is lightweight and responds instantly to every keystroke."
-            />
-            <FeatureCard 
-              icon={<Search className="text-blue-500" />}
-              title="Fuzzy Finding"
-              description="Locate your past experiments by typing just parts of the name. Fast and intuitive."
-            />
-            <FeatureCard 
-              icon={<GitBranch className="text-purple-500" />}
-              title="Clone & Try"
-              description="Pass a Git URL and try-rs takes care of the cloning and organization for you."
-            />
-            <FeatureCard 
-              icon={<Command className="text-orange-500" />}
-              title="Ratatui Interface"
-              description="A complete TUI with windows, confirmation popups, and configurable colors."
-            />
-            <FeatureCard 
-              icon={<Trash2 className="text-red-500" />}
-              title="Safe Cleanup"
-              description="Remove what you no longer need with a shortcut, without risking important data."
-            />
-            <FeatureCard 
-              icon={<Check className="text-green-500" />}
-              title="Cross-platform"
-              description="First-class support for Linux, macOS, and Windows. Consistent experience on any OS."
-            />
-          </div>
-        </div>
-      </section>
-
-      {/* Installation */}
-      <section id="install" className="py-24 bg-[#161b22]/50 border-y border-gray-800 px-6">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold text-white mb-12 text-center">Installation</h2>
-          
-          <div className="flex justify-center gap-2 mb-8 p-1 bg-gray-800 rounded-xl w-fit mx-auto">
-            {['cargo', 'aur', 'binary'].map((tab) => (
-              <button
-                key={tab}
-                onClick={() => setActiveTab(tab)}
-                className={`px-6 py-2 rounded-lg text-sm font-medium transition-all ${
-                  activeTab === tab ? 'bg-orange-600 text-white shadow-lg' : 'text-gray-400 hover:text-white'
-                }`}
-              >
-                {tab.charAt(0).toUpperCase() + tab.slice(1)}
-              </button>
-            ))}
-          </div>
-
-          <div className="bg-[#0d1117] border border-gray-700 rounded-xl p-6 font-mono text-sm group relative">
-            <div className="flex items-center justify-between mb-4">
-              <span className="text-gray-500 uppercase tracking-widest text-xs flex items-center gap-2">
-                <Terminal size={14} />
-                Command
-              </span>
-              <button 
-                onClick={() => copyToClipboard(installCommands[activeTab])}
-                className="opacity-0 group-hover:opacity-100 transition-opacity p-2 hover:bg-gray-800 rounded text-gray-400"
-              >
-                <Copy size={16} />
-              </button>
+    <!-- Installation -->
+    <section id="install" class="py-24 bg-[#161b22]/50 border-y border-gray-800 px-6">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold text-white mb-12 text-center">Installation</h2>
+            
+            <div class="flex justify-center gap-2 mb-8 p-1 bg-gray-800 rounded-xl w-fit mx-auto">
+                <button onclick="switchTab('cargo', 'cargo install try-rs')" id="tab-cargo" class="px-6 py-2 rounded-lg text-sm font-medium transition-all tab-active">Cargo</button>
+                <button onclick="switchTab('aur', 'yay -S try-rs-bin')" id="tab-aur" class="px-6 py-2 rounded-lg text-sm font-medium transition-all text-gray-400 hover:text-white">AUR</button>
+                <button onclick="switchTab('binary', 'gh release download -R tassiovirginio/try-rs')" id="tab-binary" class="px-6 py-2 rounded-lg text-sm font-medium transition-all text-gray-400 hover:text-white">Binary</button>
             </div>
-            <div className="text-orange-400 flex items-center gap-2 overflow-x-auto whitespace-nowrap pb-2">
-              <span className="text-gray-600">$</span>
-              {installCommands[activeTab]}
+
+            <div class="bg-[#0d1117] border border-gray-700 rounded-xl p-6 mono text-sm group relative">
+                <div class="flex items-center justify-between mb-4 text-gray-500 uppercase tracking-widest text-xs">
+                    <span class="flex items-center gap-2"><i data-lucide="terminal" class="w-3.5 h-3.5"></i> Terminal</span>
+                    <button onclick="copyInstallCmd(this)" class="opacity-0 group-hover:opacity-100 transition-opacity p-2 hover:bg-gray-800 rounded text-gray-400">
+                        <i data-lucide="copy" class="w-4 h-4"></i>
+                    </button>
+                </div>
+                <div class="text-orange-400 flex items-center gap-2 overflow-x-auto whitespace-nowrap pb-2">
+                    <span class="text-gray-600">$</span>
+                    <span id="install-cmd-text">cargo install try-rs</span>
+                </div>
             </div>
-          </div>
-          
-          <div className="mt-8 flex justify-center">
-            <a 
-              href="https://github.com/tassiovirginio/try-rs/releases" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="text-gray-500 hover:text-white flex items-center gap-2 text-sm transition-colors"
-            >
-              View releases on GitHub
-              <ExternalLink size={14} />
-            </a>
-          </div>
         </div>
-      </section>
+    </section>
 
-      {/* Shortcuts */}
-      <section className="py-24 px-6">
-        <div className="max-w-3xl mx-auto">
-          <h2 className="text-2xl font-bold text-white mb-8 flex items-center gap-3">
-            <Command size={24} className="text-orange-500" />
-            Keyboard Shortcuts
-          </h2>
-          <div className="grid grid-cols-1 border border-gray-800 rounded-2xl overflow-hidden bg-gray-900/30">
-            <ShortcutRow keys="Typing" action="Starts fuzzy search automatically" />
-            <ShortcutRow keys="↑ / ↓" action="Navigate through the list of experiments" />
-            <ShortcutRow keys="Enter" action="Open the selected directory" />
-            <ShortcutRow keys="Ctrl + D" action="Delete the experiment (requires confirmation)" />
-            <ShortcutRow keys="Esc" action="Cancel operation or exit the application" />
-          </div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="py-12 border-t border-gray-800 px-6 bg-[#010409]">
-        <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8 text-center md:text-left">
-          <div className="flex flex-col gap-2">
-            <div className="flex items-center justify-center md:justify-start gap-2">
-              <div className="w-6 h-6 bg-orange-600 rounded flex items-center justify-center text-[10px] text-white font-bold">🦀</div>
-              <span className="text-white font-bold">try-rs</span>
+    <!-- Shortcuts -->
+    <section class="py-24 px-6">
+        <div class="max-w-3xl mx-auto">
+            <h2 class="text-2xl font-bold text-white mb-8 flex items-center gap-3">
+                <i data-lucide="command" class="text-orange-500"></i> Keyboard Shortcuts
+            </h2>
+            <div class="grid grid-cols-1 border border-gray-800 rounded-2xl overflow-hidden bg-gray-900/30">
+                <div class="flex items-center justify-between p-5 border-b border-gray-800 hover:bg-white/5 transition-colors">
+                    <span class="min-w-[60px] text-center text-white mono bg-gray-800 px-3 py-1.5 rounded-lg border border-gray-700 text-xs shadow-inner">Typing</span>
+                    <span class="text-gray-400 text-sm font-medium">Starts fuzzy search automatically</span>
+                </div>
+                <div class="flex items-center justify-between p-5 border-b border-gray-800 hover:bg-white/5 transition-colors">
+                    <span class="min-w-[60px] text-center text-white mono bg-gray-800 px-3 py-1.5 rounded-lg border border-gray-700 text-xs shadow-inner">↑ / ↓</span>
+                    <span class="text-gray-400 text-sm font-medium">Navigate through the list</span>
+                </div>
+                <div class="flex items-center justify-between p-5 border-b border-gray-800 hover:bg-white/5 transition-colors">
+                    <span class="min-w-[60px] text-center text-white mono bg-gray-800 px-3 py-1.5 rounded-lg border border-gray-700 text-xs shadow-inner">Enter</span>
+                    <span class="text-gray-400 text-sm font-medium">Open the selected directory</span>
+                </div>
+                <div class="flex items-center justify-between p-5 hover:bg-white/5 transition-colors">
+                    <span class="min-w-[60px] text-center text-white mono bg-gray-800 px-3 py-1.5 rounded-lg border border-gray-700 text-xs shadow-inner">Ctrl + D</span>
+                    <span class="text-gray-400 text-sm font-medium">Delete (requires confirmation)</span>
+                </div>
             </div>
-            <span className="text-gray-500 text-sm">
-              Built with passion by <a href="https://github.com/tassiovirginio" className="text-gray-300 hover:text-orange-500 underline decoration-gray-700 underline-offset-4">Tássio Virgínio</a>
-            </span>
-          </div>
-          <div className="flex gap-8 text-sm text-gray-500">
-            <a href="https://crates.io/crates/try-rs" className="hover:text-white transition-colors">Crates.io</a>
-            <a href="https://github.com/tassiovirginio/try-rs/stargazers" className="hover:text-white transition-colors">Star on GitHub</a>
-            <a href="https://github.com/tassiovirginio/try-rs/blob/main/LICENSE" className="hover:text-white transition-colors">MIT License</a>
-          </div>
         </div>
-      </footer>
-    </div>
-  );
-};
+    </section>
 
-const FeatureCard = ({ icon, title, description }) => (
-  <div className="p-8 bg-gray-800/20 border border-gray-800 rounded-2xl hover:border-orange-500/30 hover:bg-gray-800/30 transition-all group">
-    <div className="w-12 h-12 bg-gray-800 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform border border-gray-700">
-      {icon}
-    </div>
-    <h3 className="text-xl font-bold text-white mb-3 tracking-tight">{title}</h3>
-    <p className="text-gray-400 text-sm leading-relaxed">{description}</p>
-  </div>
-);
+    <!-- Footer -->
+    <footer class="py-12 border-t border-gray-800 px-6 bg-[#010409]">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8 text-center md:text-left">
+            <div class="flex flex-col gap-2">
+                <div class="flex items-center justify-center md:justify-start gap-2">
+                    <div class="w-6 h-6 bg-orange-600 rounded flex items-center justify-center text-[10px] text-white font-bold">🦀</div>
+                    <span class="text-white font-bold">try-rs</span>
+                </div>
+                <span class="text-gray-500 text-sm">Built by <a href="https://github.com/tassiovirginio" class="text-gray-300 hover:text-orange-500 underline decoration-gray-700 underline-offset-4">Tássio Virgínio</a></span>
+            </div>
+            <div class="flex gap-8 text-sm text-gray-500">
+                <a href="https://crates.io/crates/try-rs" class="hover:text-white transition-colors">Crates.io</a>
+                <a href="https://github.com/tassiovirginio/try-rs/stargazers" class="hover:text-white transition-colors">Star on GitHub</a>
+                <a href="https://github.com/tassiovirginio/try-rs/blob/main/LICENSE" class="hover:text-white transition-colors">MIT License</a>
+            </div>
+        </div>
+    </footer>
 
-const ShortcutRow = ({ keys, action }) => (
-  <div className="flex items-center justify-between p-5 border-b border-gray-800 last:border-0 hover:bg-white/5 transition-colors">
-    <div className="flex items-center gap-2">
-      <span className="min-w-[60px] text-center text-white font-mono bg-gray-800 px-3 py-1.5 rounded-lg border border-gray-700 text-xs shadow-inner">
-        {keys}
-      </span>
-    </div>
-    <span className="text-gray-400 text-sm font-medium">{action}</span>
-  </div>
-);
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
 
-export default App;
+        // Installation Tabs Logic
+        function switchTab(tab, cmd) {
+            document.getElementById('install-cmd-text').innerText = cmd;
+            
+            // Update active classes
+            const tabs = ['cargo', 'aur', 'binary'];
+            tabs.forEach(t => {
+                const el = document.getElementById('tab-' + t);
+                if (t === tab) {
+                    el.classList.add('tab-active');
+                    el.classList.remove('text-gray-400', 'hover:text-white');
+                } else {
+                    el.classList.remove('tab-active');
+                    el.classList.add('text-gray-400', 'hover:text-white');
+                }
+            });
+        }
+
+        // Copy Clipboard Generic
+        function copyToClipboard(text) {
+            const el = document.createElement('textarea');
+            el.value = text;
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand('copy');
+            document.body.removeChild(el);
+        }
+
+        function copyCmd(text, btn) {
+            copyToClipboard(text);
+            const originalIcon = btn.innerHTML;
+            btn.innerHTML = '<i data-lucide="check" class="w-4 h-4 text-green-500"></i>';
+            lucide.createIcons();
+            setTimeout(() => {
+                btn.innerHTML = originalIcon;
+                lucide.createIcons();
+            }, 2000);
+        }
+
+        function copyInstallCmd(btn) {
+            const cmd = document.getElementById('install-cmd-text').innerText;
+            copyCmd(cmd, btn);
+        }
+    </script>
+</body>
+</html>
