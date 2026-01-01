@@ -27,7 +27,7 @@
 </head>
 <body class="bg-[#0d1117] text-gray-300 selection:bg-orange-500/30">
 
-    <!-- Navegação -->
+    <!-- Navigation -->
     <nav class="border-b border-gray-800 bg-[#0d1117]/80 backdrop-blur-md sticky top-0 z-50">
         <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
             <div class="flex items-center gap-2">
@@ -47,7 +47,7 @@
         </div>
     </nav>
 
-    <!-- Secção Hero -->
+    <!-- Hero Section -->
     <header class="pt-20 pb-32 px-6 relative overflow-hidden bg-grid">
         <div class="max-w-4xl mx-auto text-center relative z-10">
             <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-500 text-sm font-medium mb-6">
@@ -99,7 +99,7 @@
         </div>
     </header>
 
-    <!-- Secção de Demonstração -->
+    <!-- Demo Section -->
     <section class="px-6 -mt-16 relative z-20">
         <div class="max-w-5xl mx-auto">
             <div class="bg-[#010409] border border-gray-700 rounded-xl shadow-2xl overflow-hidden shadow-orange-500/10">
@@ -128,7 +128,7 @@
         </div>
     </section>
 
-    <!-- Uso da CLI -->
+    <!-- CLI Usage Section -->
     <section id="usage" class="py-32 px-6">
         <div class="max-w-4xl mx-auto">
             <h2 class="text-3xl font-bold text-white mb-8 flex items-center gap-3">
@@ -151,7 +151,7 @@
         </div>
     </section>
 
-    <!-- Todas as Funcionalidades -->
+    <!-- Features Section -->
     <section id="features" class="py-24 px-6 bg-[#161b22]/30 border-y border-gray-800">
         <div class="max-w-6xl mx-auto">
             <div class="text-center mb-16">
@@ -226,7 +226,7 @@
         </div>
     </section>
 
-    <!-- Configuração -->
+    <!-- Configuration Section -->
     <section id="config" class="py-32 px-6">
         <div class="max-w-4xl mx-auto">
             <h2 class="text-3xl font-bold text-white mb-8 flex items-center gap-3">
@@ -234,7 +234,7 @@
             </h2>
             <p class="text-gray-400 mb-8 leading-relaxed">Customize your experience by creating a <code class="mono text-orange-300">config.toml</code> file. The location depends on your operating system:</p>
             
-            <!-- Caminhos por OS -->
+            <!-- Paths by OS -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
                 <div class="p-4 border border-gray-800 rounded-xl bg-gray-900/20">
                     <div class="flex items-center gap-2 mb-2 text-white font-bold text-sm">
@@ -295,7 +295,7 @@
         </div>
     </section>
 
-    <!-- Instalação -->
+    <!-- Installation Section -->
     <section id="install" class="py-24 bg-[#161b22]/50 border-y border-gray-800 px-6">
         <div class="max-w-4xl mx-auto text-center">
             <h2 class="text-3xl font-bold text-white mb-12">Install Now</h2>
@@ -324,7 +324,7 @@
         </div>
     </section>
 
-    <!-- Atalhos -->
+    <!-- Shortcuts Section -->
     <section class="py-24 px-6">
         <div class="max-w-3xl mx-auto">
             <h2 class="text-2xl font-bold text-white mb-8 flex items-center gap-3">
@@ -355,7 +355,7 @@
         </div>
     </section>
 
-    <!-- Rodapé -->
+    <!-- Footer -->
     <footer class="py-12 border-t border-gray-800 px-6 bg-[#010409]">
         <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8 text-center md:text-left">
             <div class="flex flex-col gap-2">
@@ -371,17 +371,35 @@
                 <a href="https://github.com/tassiovirginio/try-rs/blob/main/LICENSE" class="hover:text-white transition-colors">MIT License</a>
             </div>
         </div>
+
+        <!-- Powered By Section -->
+        <div class="max-w-6xl mx-auto mt-10 pt-8 border-t border-gray-800/50 flex flex-wrap justify-center gap-8 text-xs text-gray-500 uppercase tracking-widest">
+            <div class="flex items-center gap-3">
+                <span>Developed with</span>
+                <a href="https://www.rust-lang.org/" target="_blank" class="flex items-center gap-2 text-gray-400 hover:text-orange-500 transition-colors group">
+                    <i data-lucide="cpu" class="w-4 h-4 text-orange-600 group-hover:scale-110 transition-transform"></i>
+                    <span class="font-bold">Rust Language</span>
+                </a>
+            </div>
+            <div class="flex items-center gap-3">
+                <span>Powered by</span>
+                <a href="https://ratatui.rs/" target="_blank" class="flex items-center gap-2 text-gray-400 hover:text-green-500 transition-colors group">
+                    <i data-lucide="terminal" class="w-4 h-4 text-green-600 group-hover:scale-110 transition-transform"></i>
+                    <span class="font-bold">Ratatui Library</span>
+                </a>
+            </div>
+        </div>
     </footer>
 
     <script>
-        // Inicializar Lucide Icons
+        // Initialize Lucide Icons
         lucide.createIcons();
 
-        // Lógica dos separadores de instalação
+        // Installation Tabs Logic
         function switchTab(tab, cmd) {
             document.getElementById('install-cmd-text').innerText = cmd;
             
-            // Atualizar requisito visual
+            // Update visual requirements
             const reqEl = document.getElementById('install-requirement');
             if (tab === 'nix') {
                 reqEl.innerHTML = 'Requirements: <code class="text-gray-400">nix</code> with flakes enabled.';
@@ -393,7 +411,7 @@
                 reqEl.innerHTML = 'Requirements: <code class="text-gray-400">gh</code> CLI or browser access.';
             }
 
-            // Atualizar classes ativas
+            // Update active classes
             const tabs = ['cargo', 'nix', 'aur', 'binary'];
             tabs.forEach(t => {
                 const el = document.getElementById('tab-' + t);
@@ -407,7 +425,7 @@
             });
         }
 
-        // Função genérica para copiar para o clipboard
+        // Generic copy to clipboard function
         function copyToClipboard(text) {
             const el = document.createElement('textarea');
             el.value = text;
