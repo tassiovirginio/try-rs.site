@@ -236,6 +236,13 @@
                     <p class="text-gray-400 text-sm leading-relaxed">Open your favorite IDE (VSCode, Neovim, Helix) instantly in the selected workspace using the <code class="mono text-xs">Ctrl+E</code> shortcut.</p>
                 </div>
 
+                <!-- Themes & Personalization -->
+                <div class="p-6 bg-gray-800/20 border border-gray-800 rounded-2xl hover:border-orange-500/30 transition-all group">
+                    <div class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center mb-4 border border-gray-700 group-hover:bg-pink-600/10 transition-colors"><i data-lucide="palette" class="text-pink-500 w-5 h-5"></i></div>
+                    <h3 class="text-lg font-bold text-white mb-2">Built-in Themes</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Switch between popular color schemes like Catppuccin, Gruvbox, or Tokyo Night at runtime with <code class="mono text-xs">Ctrl+T</code>.</p>
+                </div>
+
                 <!-- Dated Hierarchy -->
                 <div class="p-6 bg-gray-800/20 border border-gray-800 rounded-2xl hover:border-orange-500/30 transition-all group">
                     <div class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center mb-4 border border-gray-700 group-hover:bg-yellow-600/10 transition-colors"><i data-lucide="calendar" class="text-yellow-500 w-5 h-5"></i></div>
@@ -249,19 +256,60 @@
                     <h3 class="text-lg font-bold text-white mb-2">Cross-platform</h3>
                     <p class="text-gray-400 text-sm leading-relaxed">Native support for Linux, macOS, and Windows. Uses OS-standard configuration paths for a native feel everywhere.</p>
                 </div>
+            </div>
+        </div>
+    </section>
 
-                <!-- Flexible Config -->
-                <div class="p-6 bg-gray-800/20 border border-gray-800 rounded-2xl hover:border-orange-500/30 transition-all group">
-                    <div class="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center mb-4 border border-gray-700 group-hover:bg-gray-600/10 transition-colors"><i data-lucide="sliders" class="text-gray-400 w-5 h-5"></i></div>
-                    <h3 class="text-lg font-bold text-white mb-2">Flexible Config</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">Configure your preferred shell, custom storage paths, and UI behavior via a simple TOML file or environment variables.</p>
+    <!-- Themes Section -->
+    <section id="themes" class="py-32 px-6">
+        <div class="max-w-4xl mx-auto">
+            <h2 class="text-3xl font-bold text-white mb-6 flex items-center gap-3">
+                <i data-lucide="palette" class="text-orange-500"></i> Themes
+            </h2>
+            <p class="text-gray-400 mb-8 leading-relaxed">
+                You can switch between themes at runtime by pressing <code class="mono text-orange-400 bg-orange-400/10 px-1.5 py-0.5 rounded border border-orange-400/20">Ctrl+T</code>. 
+                The following themes are currently available:
+            </p>
+            
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-10">
+                <div class="p-4 border border-gray-800 rounded-xl bg-gray-900/20 hover:border-gray-700 transition-colors">
+                    <span class="text-white font-semibold text-sm">Catppuccin Mocha</span>
+                    <span class="text-[10px] text-gray-600 block mt-1 italic">(Default)</span>
                 </div>
+                <div class="p-4 border border-gray-800 rounded-xl bg-gray-900/20 hover:border-gray-700 transition-colors">
+                    <span class="text-white font-semibold text-sm">Dracula</span>
+                </div>
+                <div class="p-4 border border-gray-800 rounded-xl bg-gray-900/20 hover:border-gray-700 transition-colors">
+                    <span class="text-white font-semibold text-sm">JetBrains Darcula</span>
+                </div>
+                <div class="p-4 border border-gray-800 rounded-xl bg-gray-900/20 hover:border-gray-700 transition-colors">
+                    <span class="text-white font-semibold text-sm">Gruvbox Dark</span>
+                </div>
+                <div class="p-4 border border-gray-800 rounded-xl bg-gray-900/20 hover:border-gray-700 transition-colors">
+                    <span class="text-white font-semibold text-sm">Nord</span>
+                </div>
+                <div class="p-4 border border-gray-800 rounded-xl bg-gray-900/20 hover:border-gray-700 transition-colors">
+                    <span class="text-white font-semibold text-sm">Tokyo Night</span>
+                </div>
+            </div>
+
+            <div class="p-6 border border-gray-800 rounded-2xl bg-[#161b22]/30">
+                <div class="flex items-center gap-3 mb-4">
+                    <i data-lucide="info" class="w-5 h-5 text-blue-500"></i>
+                    <h3 class="text-lg font-bold text-white tracking-tight">Custom Themes</h3>
+                </div>
+                <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                    Preference for something unique? You can define your own color palette by overriding the <code class="mono text-orange-300">[colors]</code> section in your <code class="mono text-orange-300">config.toml</code>.
+                </p>
+                <a href="#config" class="text-xs text-orange-500 hover:text-orange-400 font-semibold flex items-center gap-1 transition-colors">
+                    View Configuration Guide <i data-lucide="arrow-right" class="w-3 h-3"></i>
+                </a>
             </div>
         </div>
     </section>
 
     <!-- Configuration Section -->
-    <section id="config" class="py-32 px-6">
+    <section id="config" class="py-32 px-6 bg-[#161b22]/30 border-y border-gray-800">
         <div class="max-w-4xl mx-auto">
             <h2 class="text-3xl font-bold text-white mb-8 flex items-center gap-3">
                 <i data-lucide="settings" class="text-orange-500"></i> Configuration
@@ -372,7 +420,7 @@
     </section>
 
     <!-- Installation Section -->
-    <section id="install" class="py-24 bg-[#161b22]/50 border-y border-gray-800 px-6">
+    <section id="install" class="py-24 px-6">
         <div class="max-w-4xl mx-auto text-center">
             <h2 class="text-3xl font-bold text-white mb-12">Install Now</h2>
             
@@ -401,7 +449,7 @@
     </section>
 
     <!-- Shortcuts Section -->
-    <section class="py-24 px-6">
+    <section class="py-24 px-6 bg-[#161b22]/30 border-t border-gray-800">
         <div class="max-w-3xl mx-auto">
             <h2 class="text-2xl font-bold text-white mb-8 flex items-center gap-3">
                 <i data-lucide="keyboard" class="text-orange-500"></i> Interface Controls
@@ -422,6 +470,10 @@
                 <div class="flex items-center justify-between p-5 border-b border-gray-800 hover:bg-white/5 transition-colors">
                     <span class="min-w-[80px] text-center text-white mono bg-gray-800 px-3 py-1.5 rounded-lg border border-gray-700 text-xs shadow-inner tracking-tighter">Ctrl + E</span>
                     <span class="text-gray-400 text-sm font-medium">Open preferred editor in the selected folder</span>
+                </div>
+                <div class="flex items-center justify-between p-5 border-b border-gray-800 hover:bg-white/5 transition-colors">
+                    <span class="min-w-[80px] text-center text-white mono bg-gray-800 px-3 py-1.5 rounded-lg border border-gray-700 text-xs shadow-inner tracking-tighter">Ctrl + T</span>
+                    <span class="text-gray-400 text-sm font-medium">Open theme selection popup</span>
                 </div>
                 <div class="flex items-center justify-between p-5 hover:bg-white/5 transition-colors">
                     <span class="min-w-[80px] text-center text-white mono bg-gray-800 px-3 py-1.5 rounded-lg border border-gray-700 text-xs shadow-inner tracking-tighter">Ctrl + D</span>
