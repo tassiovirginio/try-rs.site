@@ -234,27 +234,59 @@
             <h2 class="text-3xl font-bold text-white mb-8 flex items-center gap-3">
                 <i data-lucide="settings" class="text-orange-500"></i> Configuration
             </h2>
-            <p class="text-gray-400 mb-8 leading-relaxed">Customize your experience by creating a <code class="mono text-orange-300">config.toml</code> file. The location depends on your operating system:</p>
+            <p class="text-gray-400 mb-8 leading-relaxed">Customize your experience by creating a <code class="mono text-orange-300">config.toml</code> file. The application checks for configuration in the following order:</p>
             
             <!-- Paths by OS -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
-                <div class="p-4 border border-gray-800 rounded-xl bg-gray-900/20">
-                    <div class="flex items-center gap-2 mb-2 text-white font-bold text-sm">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                <!-- Linux -->
+                <div class="flex flex-col gap-3">
+                    <div class="flex items-center gap-2 text-white font-bold text-sm">
                         <i data-lucide="terminal" class="w-4 h-4 text-orange-500"></i> Linux
                     </div>
-                    <code class="mono text-xs text-gray-500 block break-all">~/.config/try-rs/config.toml</code>
+                    <div class="space-y-2">
+                        <div class="p-3 border border-gray-800 rounded-xl bg-gray-900/20">
+                            <span class="text-[10px] uppercase text-gray-600 mb-1 block">1. OS Default</span>
+                            <code class="mono text-xs text-gray-400 block break-all">~/.config/try-rs/config.toml</code>
+                        </div>
+                        <div class="p-3 border border-gray-800 rounded-xl bg-gray-900/20">
+                            <span class="text-[10px] uppercase text-gray-600 mb-1 block">2. Home Local</span>
+                            <code class="mono text-xs text-gray-400 block break-all">~/.config/try-rs/config.toml</code>
+                        </div>
+                    </div>
                 </div>
-                <div class="p-4 border border-gray-800 rounded-xl bg-gray-900/20">
-                    <div class="flex items-center gap-2 mb-2 text-white font-bold text-sm">
+
+                <!-- macOS -->
+                <div class="flex flex-col gap-3">
+                    <div class="flex items-center gap-2 text-white font-bold text-sm">
                         <i data-lucide="apple" class="w-4 h-4 text-orange-500"></i> macOS
                     </div>
-                    <code class="mono text-xs text-gray-500 block break-all">~/Library/Application Support/try-rs/config.toml</code>
+                    <div class="space-y-2">
+                        <div class="p-3 border border-gray-800 rounded-xl bg-gray-900/20">
+                            <span class="text-[10px] uppercase text-gray-600 mb-1 block">1. OS Default</span>
+                            <code class="mono text-xs text-gray-400 block break-all">~/Library/Application Support/try-rs/config.toml</code>
+                        </div>
+                        <div class="p-3 border border-gray-800 rounded-xl bg-gray-900/20">
+                            <span class="text-[10px] uppercase text-gray-600 mb-1 block">2. Home Local</span>
+                            <code class="mono text-xs text-gray-400 block break-all">~/.config/try-rs/config.toml</code>
+                        </div>
+                    </div>
                 </div>
-                <div class="p-4 border border-gray-800 rounded-xl bg-gray-900/20">
-                    <div class="flex items-center gap-2 mb-2 text-white font-bold text-sm">
+
+                <!-- Windows -->
+                <div class="flex flex-col gap-3">
+                    <div class="flex items-center gap-2 text-white font-bold text-sm">
                         <i data-lucide="layout" class="w-4 h-4 text-orange-500"></i> Windows
                     </div>
-                    <code class="mono text-xs text-gray-500 block break-all">%AppData%\try-rs\config.toml</code>
+                    <div class="space-y-2">
+                        <div class="p-3 border border-gray-800 rounded-xl bg-gray-900/20">
+                            <span class="text-[10px] uppercase text-gray-600 mb-1 block">1. OS Default</span>
+                            <code class="mono text-xs text-gray-400 block break-all">%AppData%\try-rs\config.toml</code>
+                        </div>
+                        <div class="p-3 border border-gray-800 rounded-xl bg-gray-900/20">
+                            <span class="text-[10px] uppercase text-gray-600 mb-1 block">2. Home Local</span>
+                            <code class="mono text-xs text-gray-400 block break-all">~/.config/try-rs/config.toml</code>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -278,20 +310,30 @@
             </div>
 
             <h3 class="text-xl font-bold text-white mb-6">Environment Variables</h3>
-            <div class="space-y-4">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between p-4 border border-gray-800 rounded-xl">
-                    <div class="mb-2 sm:mb-0">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="p-4 border border-gray-800 rounded-xl bg-gray-900/10">
+                    <div class="flex items-center justify-between mb-2">
                         <code class="mono text-orange-400 text-sm font-bold">TRY_PATH</code>
-                        <p class="text-xs text-gray-500 mt-1">Overrides the default storage path.</p>
+                        <span class="text-[10px] text-gray-600 border border-gray-800 px-1.5 rounded uppercase">Path</span>
                     </div>
-                    <code class="mono text-gray-400 text-xs">export TRY_PATH="/home/user/tmp"</code>
+                    <p class="text-xs text-gray-500 mb-3 leading-relaxed">Overrides the path where experiments are stored.</p>
+                    <code class="mono text-gray-400 text-[10px] bg-black/30 p-1.5 rounded block overflow-x-auto">export TRY_PATH="/home/user/tmp"</code>
                 </div>
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between p-4 border border-gray-800 rounded-xl">
-                    <div class="mb-2 sm:mb-0">
-                        <code class="mono text-orange-400 text-sm font-bold">TRY_CONFIG</code>
-                        <p class="text-xs text-gray-500 mt-1">Specify a custom path for the config file.</p>
+                <div class="p-4 border border-gray-800 rounded-xl bg-gray-900/10">
+                    <div class="flex items-center justify-between mb-2">
+                        <code class="mono text-orange-400 text-sm font-bold">TRY_CONFIG_DIR</code>
+                        <span class="text-[10px] text-gray-600 border border-gray-800 px-1.5 rounded uppercase">Directory</span>
                     </div>
-                    <code class="mono text-gray-400 text-xs">export TRY_CONFIG="~/.try.toml"</code>
+                    <p class="text-xs text-gray-500 mb-3 leading-relaxed">Overrides the default configuration directory.</p>
+                    <code class="mono text-gray-400 text-[10px] bg-black/30 p-1.5 rounded block overflow-x-auto">export TRY_CONFIG_DIR="/home/user/.myconfig"</code>
+                </div>
+                <div class="p-4 border border-gray-800 rounded-xl bg-gray-900/10">
+                    <div class="flex items-center justify-between mb-2">
+                        <code class="mono text-orange-400 text-sm font-bold">TRY_CONFIG</code>
+                        <span class="text-[10px] text-gray-600 border border-gray-800 px-1.5 rounded uppercase">Filename</span>
+                    </div>
+                    <p class="text-xs text-gray-500 mb-3 leading-relaxed">Overrides the config filename (defaults to <code class="mono">config.toml</code>).</p>
+                    <code class="mono text-gray-400 text-[10px] bg-black/30 p-1.5 rounded block overflow-x-auto">export TRY_CONFIG="custom.toml"</code>
                 </div>
             </div>
         </div>
