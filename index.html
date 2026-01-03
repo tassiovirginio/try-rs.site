@@ -426,6 +426,7 @@
             
             <div class="flex flex-wrap justify-center gap-2 mb-8 p-1 bg-gray-800 rounded-xl w-fit mx-auto">
                 <button onclick="switchTab('cargo', 'cargo install try-rs')" id="tab-cargo" class="px-5 py-2 rounded-lg text-sm font-medium transition-all tab-active">Cargo</button>
+                <button onclick="switchTab('ppa', 'sudo add-apt-repository ppa:tassiovirginio/try-rs && sudo apt update && sudo apt install try-rs')" id="tab-ppa" class="px-5 py-2 rounded-lg text-sm font-medium transition-all text-gray-400 hover:text-white">PPA (Ubuntu)</button>
                 <button onclick="switchTab('nix', 'nix profile install github:tassiovirginio/try-rs')" id="tab-nix" class="px-5 py-2 rounded-lg text-sm font-medium transition-all text-gray-400 hover:text-white">Nix</button>
                 <button onclick="switchTab('aur', 'yay -S try-rs-bin')" id="tab-aur" class="px-5 py-2 rounded-lg text-sm font-medium transition-all text-gray-400 hover:text-white">AUR</button>
                 <button onclick="switchTab('binary', 'gh release download -R tassiovirginio/try-rs')" id="tab-binary" class="px-5 py-2 rounded-lg text-sm font-medium transition-all text-gray-400 hover:text-white">Binary</button>
@@ -537,7 +538,9 @@
             
             // Atualizar requisito visual
             const reqEl = document.getElementById('install-requirement');
-            if (tab === 'nix') {
+            if (tab === 'ppa') {
+                reqEl.innerHTML = 'Requirements: Ubuntu or Debian-based system with <code class="text-gray-400">software-properties-common</code>.';
+            } else if (tab === 'nix') {
                 reqEl.innerHTML = 'Requirements: <code class="text-gray-400">nix</code> with flakes enabled.';
             } else if (tab === 'cargo') {
                 reqEl.innerHTML = 'Requirements: <code class="text-gray-400">cargo</code> (Rust toolchain) installed.';
@@ -548,7 +551,7 @@
             }
 
             // Atualizar classes ativas
-            const tabs = ['cargo', 'nix', 'aur', 'binary'];
+            const tabs = ['cargo', 'ppa', 'nix', 'aur', 'binary'];
             tabs.forEach(t => {
                 const el = document.getElementById('tab-' + t);
                 if (el) {
